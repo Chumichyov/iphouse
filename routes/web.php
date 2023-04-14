@@ -1,0 +1,74 @@
+<?php
+
+use App\Http\Controllers\History\HistoryController;
+use App\Http\Controllers\Partner\PartnerController;
+use App\Http\Controllers\Personal\PersonalController;
+use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Transaction\TransactionController;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/', function () {
+    if (auth()->user()) {
+        return redirect('/products?type=Table');
+    }
+
+    return redirect('/login');
+});
+
+Route::group(['namespace' => 'App\Http\Controllers\Auth'], function () {
+    Route::post('/preregister', 'PreRegistration')->name('preRegistration');
+});
+
+Auth::routes();
+
+Route::group(['middleware' => 'auth'], function () {
+    // Для всех
+    Route::group(['namespace' => 'App\Http\Controllers\Product'], function () {
+        Route::get('/products', [ProductController::class, 'index'])->name('product.index');
+        Route::get('/products/{product}', [ProductController::class, 'show'])->name('product.show');
+        Route::post('/products', [ProductController::class, 'store'])->name('product.store');
+        Route::patch('/products/{product}', [ProductController::class, 'update'])->name('product.update');
+        Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+    });
+
+    Route::group(['namespace' => 'App\Http\Controllers\History'], function () {
+        Route::get('/history', [HistoryController::class, 'index'])->name('history.index');
+    });
+
+    Route::group(['namespace' => 'App\Http\Controllers\Transaction'], function () {
+        Route::get('/transaction/expense', [TransactionController::class, 'createExpense'])->name('transaction.createExpense');
+        Route::get('/transaction/coming', [TransactionController::class, 'createComing'])->name('transaction.createComing');
+        Route::post('/transaction', [TransactionController::class, 'store'])->name('transaction.store');
+    });
+
+    Route::group(['namespace' => 'App\Http\Controllers\Personal'], function () {
+        Route::get('/personal', [PersonalController::class, 'index'])->name('personal.index');
+    });
+
+    Route::group(['namespace' => 'App\Http\Controllers\Partner'], function () {
+        Route::get('/partners', [PartnerController::class, 'index'])->name('partner.index');
+        Route::post('/partners', [PartnerController::class, 'store'])->name('partner.store');
+        Route::patch('/partners/{partner}', [PartnerController::class, 'update'])->name('partner.update');
+        Route::delete('/partners/{partner}', [PartnerController::class, 'destroy'])->name('partner.destroy');
+        // Route::get('/partners/create', [PartnerController::class, 'create'])->name('partner.create');
+    });
+
+    // Администратор
+    Route::group(['middleware' => 'admin'], function () {
+        Route::group(['namespace' => 'App\Http\Controllers\Personal'], function () {
+            Route::patch('/personal/{user}', [PersonalController::class, 'update'])->name('personal.update');
+            Route::delete('/personal/{user}', [PersonalController::class, 'destroy'])->name('personal.destroy');
+        });
+    });
+});

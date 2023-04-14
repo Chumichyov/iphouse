@@ -1,0 +1,40 @@
+.background-blue {
+    background-color: #004d7f;
+}
+
+.text-blue {
+    color: #004d7f;
+}
+
+.nav-link.active {
+    background-color: #004d7f !important;
+}
+
+.active > .page-link {
+    background-color: #004d7f !important;
+
+}
+
+.btn.btn-primary.background-blue:hover {
+    background-color: #004d7f !important;
+}
+
+.btn.btn-primary.background-blue:focus-visible {
+    background-color: #004d7f !important;
+}
+
+.fs-16 {
+    font-size: 16px;
+}
+
+.form-check-input:checked {
+    background-color: #004d7f;
+    border-color: #004d7f;
+}
+
+.points-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }

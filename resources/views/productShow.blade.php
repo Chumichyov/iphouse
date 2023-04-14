@@ -1,0 +1,85 @@
+@extends('layouts.app')
+@section('content')
+    <div class="container w-100">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="fs-2 text-blue">
+                Товар
+            </div>
+        </div>
+        <div class="mt-4">
+            <div class="d-flex">
+                <div class="border-end pe-2" style="width: 308px">
+                    <img src="{{ $product->information->photo_path }}" class="w-100" alt="">
+                </div>
+                <div class="ms-4 d-flex flex-column flex-fill">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="px-3 py-2 background-blue rounded text-light text-center" style="max-width: 90px">
+                            {{ $product->code }}
+                        </div>
+                        <form action="{{ route('product.destroy', ['product' => $product->id]) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                        </form>
+                    </div>
+                    <form action="{{ route('product.update', ['product' => $product->id]) }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <div class="fs-5 mt-3">
+                            <div class="border-bottom pb-1 mb-2">Название:</div>
+                            <div class="d-flex align-items-center">
+                                <input id="title" type="text" style="max-width: 450px"
+                                    class="fs-4 form-control w-100" name="title" value="{{ $product->title }}" required
+                                    autocomplete="title">
+                                <button type="submit" class="ms-3 btn btn-primary background-blue">Изменить</button>
+                            </div>
+                        </div>
+                        <div class="fs-5 mt-3">
+                            <div class="border-bottom pb-1 mb-2">Количество:</div>
+                            <div class="fs-4">{{ $product->amount }}шт.</div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="mt-4">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="fs-2 text-blue">
+                    Транзакции
+                </div>
+            </div>
+            @if (count($history) != 0)
+                <table class="table mt-3">
+                    <thead>
+                        <tr>
+                            <th class="fs-5" scope="col">Дата</th>
+                            <th class="fs-5" scope="col">Персонал</th>
+                            <th class="fs-5" style="width: 150px" scope="col">Тип</th>
+                            <th class="fs-5" style="width: 350px" scope="col">Партнер</th>
+                            <th class="fs-5" scope="col">Товар</th>
+                            <th class="fs-5" style="width: 150px" scope="col">Количество</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($history as $transaction)
+                            <tr>
+                                <td class="fs-5 ">
+                                    {{ \Carbon\Carbon::parse($transaction->created_at)->format('d-m-Y') }}</td>
+                                <td class="fs-5 ">{{ $transaction->user->name . ' ' . $transaction->user->surname }}</td>
+                                <td class="fs-5 ">{{ $transaction->type->title }}</td>
+                                <td class="fs-5 ">
+                                    {{ isset($transaction->partner->title) ? $transaction->partner->title : '' }}
+                                </td>
+                                <td class="fs-5 ">{{ $transaction->product->title }}</td>
+                                <td class="fs-5 ">{{ $transaction->amount }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
+                <div class="w-100 text-center fs-1 mt-3">Транзакции отсутствуют</div>
+            @endif
+        </div>
+    </div>
+    @include('examples.errorAndSuccessHandler')
+@endsection
