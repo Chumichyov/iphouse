@@ -3,6 +3,9 @@
 @section('content')
     <div class="container mb-5">
         <div class="row justify-content-center">
+            <div class="col-12 d-flex justify-content-center mb-4">
+                <img src="{{ asset('image/wilogo1.gif') }}" alt="" style="max-width: 307px">
+            </div>
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Авторизация</div>
