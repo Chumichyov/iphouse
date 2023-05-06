@@ -15,6 +15,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string'],
+            'price' => ['required', 'integer'],
             'image' => ['required', 'image', 'max:8192'],
         ];
     }

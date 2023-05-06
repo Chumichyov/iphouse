@@ -5,10 +5,15 @@
             <div class="fs-2 text-blue">
                 Товары на складе
             </div>
-            <button type="button" class="btn btn-primary background-blue" data-bs-toggle="modal"
-                data-bs-target="#productCreate">
-                Создать
-            </button>
+            <div class="d-flex align-items-center">
+                <button type="button" class="btn btn-success">
+                    Excel
+                </button>
+                <button type="button" class="btn btn-primary background-blue ms-3" data-bs-toggle="modal"
+                    data-bs-target="#productCreate">
+                    Создать
+                </button>
+            </div>
         </div>
         <div class="mt-3">
             <div class="d-flex align-items-center justify-content-start">
@@ -47,6 +52,7 @@
                             <tr>
                                 <th class="fs-5" style="width: 100px" scope="col">Артикул</th>
                                 <th class="fs-5" scope="col">Название</th>
+                                <th class="fs-5" style='width: 100px' scope="col">Цена</th>
                                 <th class="fs-5" style="width: 130px" scope="col">Количество</th>
                             </tr>
                         </thead>
@@ -59,7 +65,8 @@
                                             class="position-absolute top-0 bottom-0 start-0 end-0"></a>
                                     </th>
                                     <td class="fs-5">{{ $product->title }}</td>
-                                    <td class="fs-5">{{ $product->amount }}</td>
+                                    <td class="fs-5">{{ $product->price }} ₽</td>
+                                    <td class="fs-5">{{ $product->amount }} шт</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -77,16 +84,23 @@
                             <div class="col-xl-3">
                                 <div class="card position-relative">
                                     <div class="p-2">
-                                        <img src="{{ asset($product->information->photo_path) }}" class="card-img-top w-100"
-                                            alt="..." style="max-height: 190px; object-fit: contain">
+                                        <img src="{{ asset($product->information->photo_path) }}"
+                                            class="card-img-top w-100" alt="..."
+                                            style="max-height: 190px; object-fit: contain">
                                     </div>
                                     <div class="card-body border-top ">
                                         <div class="fs-5">
                                             {{ $product->code }}</div>
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="fs-5 points-1 me-4">{{ $product->title }}</div>
+                                        </div>
+                                        <div class="fs-5 d-flex align-items-center justify-content-between">
                                             <div class="fs-5 text-blue fw-bolder">
-                                                {{ $product->amount }}</div>
+                                                {{ $product->amount }} шт
+                                            </div>
+                                            <div class="fs-5 text-blue fw-bolder">
+                                                {{ $product->price }} ₽
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -124,6 +138,14 @@
                             <div class="col-md-7">
                                 <input id="title" type="text" class="form-control" name="title"
                                     value="{{ old('title') }}" required autocomplete="title" autofocus>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="price" class="col-md-3 col-form-label text-md-end">Цена</label>
+
+                            <div class="col-md-7">
+                                <input id="price" type="number" class="form-control" name="price"
+                                    value="{{ old('price') }}" required autocomplete="price" autofocus>
                             </div>
                         </div>
                         <div class="row">

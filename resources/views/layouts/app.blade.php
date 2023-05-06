@@ -59,7 +59,7 @@
                                     style="width: 24px; height: 24px">
                             @endif
                             <span
-                                class="fs-5 ms-2 text-blue @if (Route::currentRouteName() === 'product.index') text-light @endif">Товары</span>
+                                class="fs-5 ms-2 text-blue @if (Route::currentRouteName() === 'product.index') text-light @endif">Оборудование</span>
                         </a>
                     </li>
 
@@ -129,7 +129,7 @@
                                         style="width: 24px; height: 24px">
                                 @endif
                                 <span
-                                    class="fs-5 ms-2 text-blue @if (Route::currentRouteName() === 'personal.index') text-light @endif">Персонал</span>
+                                    class="fs-5 ms-2 text-blue @if (Route::currentRouteName() === 'personal.index') text-light @endif">Сотрудники</span>
                             </a>
                         </li>
                     @endcan

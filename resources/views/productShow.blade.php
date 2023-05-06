@@ -26,14 +26,22 @@
                         @csrf
                         @method('PATCH')
                         <div class="fs-5 mt-3">
-                            <div class="border-bottom pb-1 mb-2">Название:</div>
+                            <div class="pb-1">Название:</div>
                             <div class="d-flex align-items-center">
                                 <input id="title" type="text" style="max-width: 450px"
                                     class="fs-4 form-control w-100" name="title" value="{{ $product->title }}" required
                                     autocomplete="title">
-                                <button type="submit" class="ms-3 btn btn-primary background-blue">Изменить</button>
                             </div>
                         </div>
+                        <div class="fs-5 mt-3">
+                            <div class="pb-1">Цена:</div>
+                            <div class="d-flex align-items-center">
+                                <input id="price" type="number" style="max-width: 450px"
+                                    class="fs-4 form-control w-100" name="price" value="{{ $product->price }}" required
+                                    autocomplete="price">
+                            </div>
+                        </div>
+                        <button type="submit" class="mt-3 btn btn-primary background-blue">Изменить</button>
                         <div class="fs-5 mt-3">
                             <div class="border-bottom pb-1 mb-2">Количество:</div>
                             <div class="fs-4">{{ $product->amount }}шт.</div>

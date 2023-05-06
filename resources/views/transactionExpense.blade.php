@@ -76,10 +76,17 @@
             @if (count($products) !== 0)
                 <input type="hidden" name="type"
                     value="{{ Route::currentRouteName() === 'transaction.createComing' ? 1 : 2 }}">
-
                 <div class="d-flex align-items-center justify-content-start">
-                    <div class="mt-4 flex-fill">
-                        <div class="">
+                    <div class="mt-4 flex-fill d-flex align-items-center">
+                        <div class="w-100" style="max-width: 360px">
+                            <select class="form-select w-100" aria-label="Default select example" autofocus name="worker">
+                                @foreach ($workers as $worker)
+                                    <option value="{{ $worker->id }}">{{ $worker->name }} {{ $worker->surname }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="ms-3">
                             <input id="amount" type="number" style="max-width: 180px" placeholder="Кол-во"
                                 class="form-control @error('amount') is-invalid @enderror" name="amount"
                                 value="{{ old('amount') }}" required autocomplete="amount" autofocus>

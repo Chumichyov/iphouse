@@ -54,6 +54,7 @@ class ProductController extends Controller
         $product = Product::create([
             'code' => $code,
             'title' => $credentials['title'],
+            'price' => $credentials['price'],
         ]);
 
         $product->information()->create([
@@ -85,6 +86,7 @@ class ProductController extends Controller
 
         $product->update([
             'title' => $credentials['title'],
+            'price' => $credentials['price'],
         ]);
 
         return back()->with('Success', 'Данные успешно изменены');

@@ -20,6 +20,11 @@ class History extends Model
         return $this->belongsTo(Partner::class);
     }
 
+    public function worker()
+    {
+        return $this->belongsTo(Worker::class);
+    }
+
     public function product()
     {
         return $this->belongsTo(Product::class);

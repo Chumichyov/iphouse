@@ -8,6 +8,7 @@ use App\Http\Requests\Transaction\StoreRequest;
 use App\Models\History;
 use App\Models\Partner;
 use App\Models\Product;
+use App\Models\Worker;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -22,6 +23,7 @@ class TransactionController extends Controller
 
         $partners = Partner::all();
         $products = Product::paginate(10);
+        $workers = Worker::all();
 
         if (isset($credentials['search'])) {
             $search = $credentials['search'];
@@ -32,7 +34,7 @@ class TransactionController extends Controller
             return view('transactionExpense', compact('partners', 'products', 'search'));
         }
 
-        return view('transactionExpense', compact('partners', 'products'));
+        return view('transactionExpense', compact('partners', 'products', 'workers'));
     }
 
     public function createComing(CreateRequest $request)
@@ -80,6 +82,7 @@ class TransactionController extends Controller
             'user_id' => auth()->user()->id,
             'type_id' => $credentials['type'],
             'partner_id' => isset($credentials['partner']) ? $credentials['partner'] : null,
+            'worker_id' => isset($credentials['worker']) ? $credentials['worker'] : null,
             'product_id' => $credentials['product'],
             'amount' => $credentials['amount'],
         ]);

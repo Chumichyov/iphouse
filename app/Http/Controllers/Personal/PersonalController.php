@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Personal;
 use App\Http\Controllers\Controller;
 use App\Models\PreRegistration;
 use App\Models\User;
+use App\Models\Worker;
 use Illuminate\Http\Request;
 
 class PersonalController extends Controller
@@ -12,10 +13,11 @@ class PersonalController extends Controller
     public function index()
     {
         $users = User::with('role')->get();
+        $workers = Worker::all();
 
         $preRegistration = PreRegistration::all();
 
-        return view('personal', compact('users', 'preRegistration'));
+        return view('personal', compact('users', 'workers', 'preRegistration'));
     }
 
     public function create()

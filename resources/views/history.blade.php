@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container w-100">
+    <div class="p-4 w-100">
         <div class="fs-2 text-blue">
             История
         </div>
@@ -9,12 +9,13 @@
                 <table class="table mt-3">
                     <thead>
                         <tr>
-                            <th class="fs-5" scope="col">Дата</th>
-                            <th class="fs-5" scope="col">Персонал</th>
-                            <th class="fs-5" style="width: 150px" scope="col">Тип</th>
-                            <th class="fs-5" style="width: 350px" scope="col">Партнер</th>
+                            <th class="fs-5" style="width: 150px" scope="col">Дата</th>
+                            <th class="fs-5" style="width: 260px" scope="col">Исполнитель</th>
+                            <th class="fs-5" style="width: 120px" scope="col">Тип</th>
+                            <th class="fs-5" style="width: 250px" scope="col">Партнер</th>
+                            <th class="fs-5" style="width: 260px" scope="col">Работник</th>
                             <th class="fs-5" scope="col">Товар</th>
-                            <th class="fs-5" style="width: 150px" scope="col">Количество</th>
+                            <th class="fs-5" style="width: 120px" scope="col">Количество</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,6 +26,9 @@
                                 <td class="fs-5 ">{{ $history->user->name . ' ' . $history->user->surname }}</td>
                                 <td class="fs-5 ">{{ $history->type->title }}</td>
                                 <td class="fs-5 ">{{ isset($history->partner->title) ? $history->partner->title : '' }}
+                                </td>
+                                <td class="fs-5 ">
+                                    {{ isset($history->worker) ? $history->worker->name . ' ' . $history->worker->surname : '' }}
                                 </td>
                                 <td class="fs-5 ">{{ $history->product->title }}</td>
                                 <td class="fs-5 ">{{ $history->amount }}</td>

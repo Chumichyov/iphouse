@@ -5,6 +5,7 @@ use App\Http\Controllers\Partner\PartnerController;
 use App\Http\Controllers\Personal\PersonalController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Transaction\TransactionController;
+use App\Http\Controllers\Worker\WorkerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,6 +63,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::patch('/partners/{partner}', [PartnerController::class, 'update'])->name('partner.update');
         Route::delete('/partners/{partner}', [PartnerController::class, 'destroy'])->name('partner.destroy');
         // Route::get('/partners/create', [PartnerController::class, 'create'])->name('partner.create');
+    });
+
+    Route::group(['namespace' => 'App\Http\Controllers\Worker'], function () {
+        Route::post('/workers', [WorkerController::class, 'store'])->name('worker.store');
+        Route::delete('/workers/{worker}', [WorkerController::class, 'delete'])->name('worker.destroy');
     });
 
     // Администратор

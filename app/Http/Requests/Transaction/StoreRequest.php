@@ -24,7 +24,8 @@ class StoreRequest extends FormRequest
         return [
             'product' => ['required', 'integer'],
             'type' => ['required', 'integer'],
-            'partner' => ['integer'],
+            'partner' => ['required', 'integer', 'sometimes'],
+            'worker' => ['required', 'integer', 'sometimes'],
             'amount' => ['required', 'integer']
         ];
     }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->integer('code')->unique();
             $table->string('title');
+            $table->integer('price');
             $table->string('amount')->default(0);
             $table->timestamps();
         });
@@ -24,26 +25,31 @@ return new class extends Migration
             [
                 'code' => 53634,
                 'title' => 'Wi-Fi роутер ASUS RT-N300',
+                'price' => 2490,
                 'amount' => 23,
             ],
             [
                 'code' => 10568,
                 'title' => 'TP-Link Archer C64',
+                'price' => 3290,
                 'amount' => 4,
             ],
             [
                 'code' => 15364,
                 'title' => 'TP-LINK TL-WR820N V2',
+                'price' => 1190,
                 'amount' => 11,
             ],
             [
                 'code' => 83457,
                 'title' => 'Mesh WiFi-система Deco E4',
+                'price' => 8099,
                 'amount' => 7,
             ],
             [
                 'code' => 34638,
                 'title' => 'Медиаплеер Rombica FLY',
+                'price' => 3499,
                 'amount' => 14,
             ],
         ]);
