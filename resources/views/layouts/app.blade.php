@@ -42,7 +42,7 @@
         </nav> --}}
         <div class="d-flex min-vh-100">
             <div class="d-flex flex-column flex-shrink-0 p-3 border-end" style="width: 340px;">
-                <a class="" href="{{ url('/products?type=Table') }}">
+                <a class="" href="{{ url('/') }}">
                     <img src="{{ asset('image/wilogo1.gif') }}" alt="" style="max-width: 307px">
                 </a>
                 <hr>

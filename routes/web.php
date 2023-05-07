@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\History\HistoryController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\Partner\PartnerController;
 use App\Http\Controllers\Personal\PersonalController;
 use App\Http\Controllers\Product\ProductController;
@@ -20,11 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    if (auth()->user()) {
-        return redirect('/products?type=Table');
-    }
-
-    return redirect('/login');
+    return view('main');
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Auth'], function () {
@@ -41,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/products', [ProductController::class, 'store'])->name('product.store');
         Route::patch('/products/{product}', [ProductController::class, 'update'])->name('product.update');
         Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+        Route::post('/products/export', [ProductController::class, 'export'])->name('product.export');
     });
 
     Route::group(['namespace' => 'App\Http\Controllers\History'], function () {

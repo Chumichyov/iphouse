@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Product;
 
+use App\Exports\ExportProducts;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\StoreRequest;
 use App\Http\Requests\Product\UpdateRequest;
@@ -12,6 +13,8 @@ use App\Models\ProductInformation;
 use Illuminate\Http\Request;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\Storage;
+
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -32,8 +35,9 @@ class ProductController extends Controller
         return view('product', compact('products'));
     }
 
-    public function create()
+    public function export()
     {
+        return Excel::download(new ExportProducts, 'products.xlsx');
     }
 
     public function store(StoreRequest $request)

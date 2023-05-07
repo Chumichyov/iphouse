@@ -6,9 +6,11 @@
                 Товары на складе
             </div>
             <div class="d-flex align-items-center">
-                <button type="button" class="btn btn-success">
-                    Excel
-                </button>
+                <form action="{{ route('product.export') }}" method="POST" name="importform" enctype="multipart/form-data">
+                    @csrf
+                    @method('post')
+                    <button type="submit" class="btn btn-success">Excel</button>
+                </form>
                 <button type="button" class="btn btn-primary background-blue ms-3" data-bs-toggle="modal"
                     data-bs-target="#productCreate">
                     Создать
@@ -84,6 +86,7 @@
                             <div class="col-xl-3">
                                 <div class="card position-relative">
                                     <div class="p-2">
+                                        @dd($product->information->photo_path)
                                         <img src="{{ asset($product->information->photo_path) }}"
                                             class="card-img-top w-100" alt="..."
                                             style="max-height: 190px; object-fit: contain">
